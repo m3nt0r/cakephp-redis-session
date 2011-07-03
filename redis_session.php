@@ -47,25 +47,25 @@ if (!class_exists('RedisSession')){
       self::$prefix = $name;
     
       if ($level == 'high') {
-  			$cookieLifeTime = 0;
-  		} else {
-  			$cookieLifeTime = Configure::read('Session.timeout') * (Security::inactiveMins() * 60);
-  		}
+        $cookieLifeTime = 0;
+      } else {
+        $cookieLifeTime = Configure::read('Session.timeout') * (Security::inactiveMins() * 60);
+      }
     
       if (empty($_SESSION)) {
-      	if (function_exists('ini_set')) {
-      		ini_set('session.use_trans_sid', 0);
-      		ini_set('url_rewriter.tags', '');
-      		ini_set('session.save_handler', 'user');
-      		ini_set('session.serialize_handler', 'php');
-      		ini_set('session.use_cookies', 1);
-      		ini_set('session.name', $name);
-  				ini_set('session.cookie_lifetime', $cookieLifeTime);
-  				ini_set('session.cookie_path', '/');
-      		ini_set('session.auto_start', 0);
-      	}
+        if (function_exists('ini_set')) {
+          ini_set('session.use_trans_sid', 0);
+          ini_set('url_rewriter.tags', '');
+          ini_set('session.save_handler', 'user');
+          ini_set('session.serialize_handler', 'php');
+          ini_set('session.use_cookies', 1);
+          ini_set('session.name', $name);
+          ini_set('session.cookie_lifetime', $cookieLifeTime);
+          ini_set('session.cookie_path', '/');
+          ini_set('session.auto_start', 0);
+        }
       }
-
+    
       session_set_save_handler( 
         array('RedisSession', '__open'), 
         array('RedisSession', '__close'), 
@@ -104,7 +104,7 @@ if (!class_exists('RedisSession')){
       self::$store->disconnect();
       return true;
     }
-
+  
     /**
      * READ
      * - Make key from session_id and prefix
