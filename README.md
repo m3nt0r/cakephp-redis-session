@@ -9,7 +9,7 @@ session data into [Redis](http://redis.io), an open source key-value store.
 2. Open ```[yourapp]/config/core.php``` and find ```'Session.save'```.
 3. Change the value of the Configure call so that it looks like this:
 
-    Configure::write('Session.save', 'redis_session');
+    ```Configure::write('Session.save', 'redis_session');```
     
 That's it.
 
