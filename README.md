@@ -1,3 +1,33 @@
+
+### ATTENTION: 
+
+Actually it is easier to just use the **Redis PECL extension** and leave **CakePHP** `Session.save` at `php`, 
+which is the default. Just install the extension with: 
+
+```
+sudo pecl install redis
+```
+
+Provided everything compiled fine, follow the instructions to load the extension and then 
+just edit your `php.ini`.
+ 
+```example
+session.save_handler = redis
+session.save_path = "tcp://192.168.0.1:6379"
+```
+
+Now restart your webserver and refresh your CakePHP app. It should work out of the box. 
+
+To verify that it works you can use the `redis-cli`. When you are at the redis prompt 
+type `monitor` and leave the window open. Refresh again and you should see the GET and 
+SETEX calls managing the session.
+
+That is the same thing this wrapper would do.
+
+Hope this works for you.
+
+----
+
 # Redis Session Store for CakePHP
 
 This class can be used in [CakePHP](http://cakephp.org) and saves 
