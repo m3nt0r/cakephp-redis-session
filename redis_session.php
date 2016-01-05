@@ -365,7 +365,7 @@ if (!class_exists('iRedis')){
 				// If the amount left to read is less than 1024 then just read the rest, else read 1024
 				$block_size = ($size - $read) > 1024 ? 1024 : ($size - $read);
 				$response .= fread($this->connection, $block_size);
-				$read += $block_size;
+				$read = strlen($response);
 			}
 			// Get rid of the CRLF at the end
 			fread($this->connection, 2);
